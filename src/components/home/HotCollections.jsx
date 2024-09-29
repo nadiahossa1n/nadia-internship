@@ -20,6 +20,19 @@ const HotCollections = () => {
     fetchHotCollections();
   }, [])
 
+const options = {
+    loop: true,
+    nav: true,
+    dots: false,
+    margin: 20,
+    responsive: {
+      1440: { items: 4 },
+      1024: { items: 3 },
+      768: { items: 2 },
+      375: { items: 1 },
+    },
+  };
+
   return (
     <section id="section-collections" className="no-bottom">
       <div className="container">
@@ -30,10 +43,9 @@ const HotCollections = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <OwlCarousel className="owl-carousel owl-theme">
+          <OwlCarousel className="owl-carousel" {...options}>
           {hotCollections.map((nft, index) => (
-            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
-              <div className="nft_coll">
+              <div key="nft.id" className="nft_coll">
                 <div className="nft_wrap">
                   <Link to="/item-details">
                     <img src={nft.nftImage} className="lazy img-fluid" alt="" />
@@ -52,7 +64,6 @@ const HotCollections = () => {
                   <span>ERC-{nft.code}</span>
                 </div>
               </div>
-            </div>
           ))}
           </OwlCarousel>
         </div>
