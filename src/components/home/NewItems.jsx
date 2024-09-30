@@ -1,9 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
+import axios from "axios";
+import OwlCarousel from "react-owl-carousel";
 
 const NewItems = () => {
+
+  const [newItems, setNewItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  async function fetchNewItems() {
+    const { data } = await axios.get(
+      "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems"
+    );
+    setNewItems(data);
+    console.log(data)
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    fetchNewItems();
+  }, [loading]);
+
+  const options = {
+    loop: true,
+    nav: true,
+    dots: false,
+    margin: 20,
+    responsive: {
+      1440: { items: 4 },
+      1024: { items: 3 },
+      768: { items: 2 },
+      375: { items: 1 },
+    },
+  };
+
   return (
     <section id="section-items" className="no-bottom">
       <div className="container">
@@ -14,9 +46,33 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          {new Array(4).fill(0).map((_, index) => (
-            <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key={index}>
-              <div className="nft__item">
+
+          {loading ? 
+          <OwlCarousel className="owl-carousel" {...options}>
+          {new Array(4).fill(4).map((_, index) => (
+          <div className="nft__item">
+            <div className="author_list_pp">
+              <div className="skeleton-box" style={{width: '50px', height: '50px', borderRadius: '999px'}}></div>
+              <i className="fa fa-check"></i>
+            </div>
+            <div className="nft__item_wrap">
+              <div className="skeleton-box" style={{ width: '100%', height: '350px', marginBottom: '8px' }}></div>
+            </div>
+            <div className="nft__item_info" style={{ display: 'flex', flexDirection: 'column'}}>
+              <a href="">
+                <div className="skeleton-box" style={{ width: '180px', height: '30px' }}></div>
+              </a>
+              <div className="skeleton-box" style={{ width: '100px', height: '20px' }}></div>
+            </div>
+            <div className="nft__item_like">
+              <div className="skeleton-box" style={{ width: '30px', height: '15px' }}></div>
+            </div>
+          </div>))}
+          </OwlCarousel>
+          :
+          <OwlCarousel className="owl-carousel" {...options}>
+          {newItems.map((nft, index) => (
+              <div className="nft__item key={index}">
                 <div className="author_list_pp">
                   <Link
                     to="/author"
@@ -24,7 +80,7 @@ const NewItems = () => {
                     data-bs-placement="top"
                     title="Creator: Monica Lucas"
                   >
-                    <img className="lazy" src={AuthorImage} alt="" />
+                    <img className="lazy" src={nft.authorImage} alt="" />
                     <i className="fa fa-check"></i>
                   </Link>
                 </div>
@@ -51,7 +107,7 @@ const NewItems = () => {
 
                   <Link to="/item-details">
                     <img
-                      src={nftImage}
+                      src={nft.nftImage}
                       className="lazy nft__item_preview"
                       alt=""
                     />
@@ -59,17 +115,17 @@ const NewItems = () => {
                 </div>
                 <div className="nft__item_info">
                   <Link to="/item-details">
-                    <h4>Pinky Ocean</h4>
+                    <h4>{nft.title}</h4>
                   </Link>
-                  <div className="nft__item_price">3.08 ETH</div>
+                  <div className="nft__item_price">{nft.price} ETH</div>
                   <div className="nft__item_like">
                     <i className="fa fa-heart"></i>
-                    <span>69</span>
+                    <span>{nft.likes}</span>
                   </div>
                 </div>
               </div>
-            </div>
           ))}
+          </OwlCarousel>}
         </div>
       </div>
     </section>

@@ -13693,6 +13693,14 @@ a.read_more i {
   padding-left: 70px;
 }
 
+.skeleton{
+  background-color: rgb(221, 219, 221);
+}
+
+.skeleton:after{
+  
+}
+
 .nft__item {
   position: relative;
   padding: 20px;
