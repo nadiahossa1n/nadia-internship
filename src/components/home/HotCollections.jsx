@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthorImage from "../../images/author_thumbnail.jpg";
-import nftImage from "../../images/nftImage.jpg";
 import axios from "axios";
 import OwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.min.css";
@@ -50,20 +48,18 @@ const HotCollections = () => {
           {loading ?  
           <OwlCarousel className="owl-carousel" {...options}>
             {new Array(4).fill(6).map((_, index) => (
-              <div className="nft_coll">
+              <div className="nft_coll" key={index}>
                 <div className="nft_wrap">
-                  <div className="skeleton"></div>
+                  <div className="skeleton-box" style={{ width: '100%', height: '200px' }}></div>
                 </div>
                 <div className="nft_coll_pp">
-                  <img className="lazy pp-coll" src={AuthorImage} alt="" />
-                  <div className="skeleton"></div>
+                  <div className="skeleton-box" style={{ width: '50px', height: '50px', borderRadius: '50%' }}></div>
                   <i className="fa fa-check"></i>
                 </div>
-                <div className="nft_coll_info title">
-                  <div className="skeleton"></div>
-                </div>
-                <div className="nft_coll_info id">
-                  <div className="skeleton"></div>
+                <div className="nft_coll_info">
+                  <div className="skeleton-box" style={{ width: '100px', height: '20px' }}></div>
+                  <br></br>
+                  <div className="skeleton-box" style={{ width: '60px', height: '20px' }}></div>
                 </div>
               </div>
             ))}
