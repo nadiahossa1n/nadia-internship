@@ -13213,35 +13213,6 @@ a.read_more i {
   -webkit-border-radius: 10px 10px 0 0;
 }
 
-.nft_wrap .skeleton{
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #dddbdd;
-}
-
-.nft_wrap .skeleton:after {
-  content: "";
-  animation: shimmer 2s infinite;
-  background-image: linear-gradient(90deg, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, .2) 20%, hsla(0, 0%, 100%, .5) 60%, hsla(0, 0%, 100%, 0));
-  position: absolute; 
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-}
-
-@keyframes shimmer {
-  0% {
-    transform: translateX(-300%);
-  }
-  100% {
-    transform: translateX(300%);
-  }
-}
-
 .nft_coll:hover img {
   transform: scale(1.05);
 }
@@ -13253,40 +13224,6 @@ a.read_more i {
 .nft_coll_info {
   padding-bottom: 10px;
 }
-
-.nft_coll_info.title .skeleton {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 18px;
-  width: calc(100%/5);
-  background-color: #dddbdd;
-  margin: 0 auto;
-}
-
-.nft_coll_info.id .skeleton {
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 18px;
-  width: calc(100%/8);
-  background-color: #dddbdd;
-  margin: 0 auto;
-}
-
-.nft_coll_info .skeleton:after {
-  content: "";
-  animation: shimmer 2s infinite;
-  background-image: linear-gradient(90deg, hsla(0, 0%, 100%, 0), hsla(0, 0%, 100%, .2) 20%, hsla(0, 0%, 100%, .5) 60%, hsla(0, 0%, 100%, 0));
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-}
-
 
 .nft_coll h4 {
   font-size: 16px;
@@ -13322,16 +13259,6 @@ a.read_more i {
   -webkit-border-radius: 100%;
   border: solid 5px #ffffff;
   background: #ffffff;
-}
-
-.nft_coll_pp .skeleton{
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #dddbdd; 
-  border-radius: 100%;
 }
 
 .nft_coll_pp i {

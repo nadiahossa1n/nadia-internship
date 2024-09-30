@@ -25,7 +25,6 @@ const NewItems = () => {
     nav: true,
     dots: false,
     margin: 20,
-    rewind: false,
     responsive: {
       1440: { items: 4 },
       1024: { items: 3 },
