@@ -9,6 +9,7 @@ const NewItems = () => {
 
   const [newItems, setNewItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [expirationData, setExpirationData] = useState({});
 
   async function fetchNewItems() {
     const { data } = await axios.get(
@@ -19,8 +20,39 @@ const NewItems = () => {
     setLoading(false)
   }
 
+  function updateExpiration() {
+    const now = new Date();
+    const updatedExpirationData = {};
+
+    for (const item of newItems) {
+      // Assuming item.expiryDate is in ISO format
+      const expirationTime = new Date(item.expiryDate);
+      const difference = expirationTime - now;
+
+      if (difference > 0) {
+        const seconds = Math.floor((difference / 1000) % 60);
+        const minutes = Math.floor((difference / 1000 / 60) % 60);
+        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+
+        updatedExpirationData[item.id] = { hours, minutes, seconds };
+      } else {
+        updatedExpirationData[item.id] = { expired: true };
+      }
+    }
+
+    setExpirationData(updatedExpirationData);
+  }
+
   useEffect(() => {
     fetchNewItems();
+  }, [loading]);
+
+  useEffect(() => {
+    if (!loading) {
+      updateExpiration();
+      const interval = setInterval(updateExpiration, 1000);
+      return () => clearInterval(interval); 
+    }
   }, [loading]);
 
   const options = {
@@ -28,6 +60,7 @@ const NewItems = () => {
     nav: true,
     dots: false,
     margin: 20,
+    rewind: false,
     responsive: {
       1440: { items: 4 },
       1024: { items: 3 },
@@ -71,8 +104,8 @@ const NewItems = () => {
           </OwlCarousel>
           :
           <OwlCarousel className="owl-carousel" {...options}>
-          {newItems.map((nft, index) => (
-              <div className="nft__item key={index}">
+          {newItems.map((nft) => (
+              <div className="nft__item" key={nft.id}>
                 <div className="author_list_pp">
                   <Link
                     to="/author"
@@ -84,7 +117,15 @@ const NewItems = () => {
                     <i className="fa fa-check"></i>
                   </Link>
                 </div>
-                <div className="de_countdown">5h 30m 32s</div>
+                <div className="de_countdown">
+                {expirationData[nft.id]?.expired ? (
+                    <span>Expired</span>
+                  ) : (
+                    <span>
+                      {expirationData[nft.id]?.hours}h {expirationData[nft.id]?.minutes}m {expirationData[nft.id]?.seconds}s
+                    </span>
+                  )}
+                </div>
 
                 <div className="nft__item_wrap">
                   <div className="nft__item_extra">
