@@ -19,10 +19,10 @@ const Author = () => {
         `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`
       );
       setAuthor(data);
-      setFollowers(author.followers);
+      setFollowers(data.followers);
       setLoading(false);
     }
-    
+
     fetchAuthor();
   }, []);
 
@@ -108,7 +108,7 @@ const Author = () => {
                           {followers} followers
                         </div>
                         <button onClick={toggleFollow} className="btn-main">
-                          Follow
+                          {isFollowing ? "Unfollow" : "Follow"}
                         </button>
                       </div>
                     </div>
