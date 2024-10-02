@@ -39,12 +39,12 @@ const NftItem = ({ id, authorId, authorName, authorImage, expiryDate, nftImage, 
           </div>
         </div>
 
-        <Link to="/item-details">
+        <Link to={`/item-details/${id}`}>
           <img src={nftImage} className="lazy nft__item_preview" alt="" />
         </Link>
       </div>
       <div className="nft__item_info">
-        <Link to="/item-details">
+        <Link to={`/item-details/${id}`}>
           <h4>{title}</h4>
         </Link>
         <div className="nft__item_price">{price} ETH</div>
