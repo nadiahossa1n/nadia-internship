@@ -97,7 +97,17 @@ const NewItems = () => {
           ) : (
             <OwlCarousel className="owl-carousel" {...options}>
               {newItems.map((nft) => (
-                <NftItem id={nft.id} authorName={nft.authorName} authorImage={nft.authorImage} expiryDate={nft.expiryDate} nftImage={nft.nftImage} price={nft.price} title={nft.title} likes={nft.likes} />
+                <NftItem
+                  id={nft.id}
+                  authorId={nft.authorId}
+                  authorName={nft.authorName}
+                  authorImage={nft.authorImage}
+                  expiryDate={nft.expiryDate}
+                  nftImage={nft.nftImage}
+                  price={nft.price}
+                  title={nft.title}
+                  likes={nft.likes}
+                />
               ))}
             </OwlCarousel>
           )}
