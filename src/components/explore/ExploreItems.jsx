@@ -57,6 +57,7 @@ const ExploreItems = () => {
               style={{ display: "block", backgroundSize: "cover" }}
             >
               <NftItem
+                authorId={nft.authorId}
                 authorName={nft.authorName}
                 authorImage={nft.authorImage}
                 expiryDate={nft.expiryDate}

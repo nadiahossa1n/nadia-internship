@@ -2,12 +2,12 @@ import React from "react";
 import CountdownTimer from "./CountdownTimer";
 import { Link } from "react-router-dom";
 
-const NftItem = ({ id, authorName, authorImage, expiryDate, nftImage, price, title, likes }) => {
+const NftItem = ({ id, authorId, authorName, authorImage, expiryDate, nftImage, price, title, likes }) => {
   return (
     <div className="nft__item" key={id}>
       <div className="author_list_pp">
         <Link
-          to="/author"
+          to={`/author/${authorId}`}
           data-bs-toggle="tooltip"
           data-bs-placement="top"
           title={`Creator: ${authorName}`}
